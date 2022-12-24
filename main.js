@@ -24,6 +24,12 @@ function getWeakness(choice) {
     }
 }
 
+function createButton(text, parent) {
+    let button = document.createElement("button")
+    button.innerText = text
+    parent.appendChild(button)
+}
+
 function playRound(playerChoice, computerChoice) {
     if (playerChoice === computerChoice) return "Tie!"
     else {
@@ -32,6 +38,16 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-for (let i = 0; i < 5; i++) {
-    console.log(playRound(getPlayerChoice(), getComputerChoice()))
+function playGame() {
+    const buttonDiv = document.getElementById("game-buttons")
+
+    // creates rock, paper, scissors buttons
+    buttonDiv.innerHTML = ""
+    createButton("Rock", buttonDiv)
+    createButton("Paper", buttonDiv)
+    createButton("Scissors", buttonDiv)
 }
+
+// for (let i = 0; i < 5; i++) {
+//     createButton(`button ${i + 1}`, document.body)
+// }

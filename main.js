@@ -3,14 +3,31 @@ function setButtonPaneState(state) {
     buttonPane.innerHTML = ""
     
     switch(state) {
+        case "empty":
+            break
+        
         case "play":
-            createButton("Play", buttonPane)
+            createButton("Play", buttonPane, () => {
+                setButtonPaneState("choice")
+            })
+            break
+
+        case "play_again":
+            createButton("Play Again", buttonPane, () => {
+                setButtonPaneState("choice")
+            })
             break
         
         case "choice":
-            createButton("Rock", buttonPane)
-            createButton("Paper", buttonPane)
-            createButton("Scissors", buttonPane)
+            createButton("Rock", buttonPane, () => {
+                playRound("rock")
+            })
+            createButton("Paper", buttonPane, () => {
+                playRound("paper")
+            })
+            createButton("Scissors", buttonPane, () => {
+                playRound("scissors")
+            })
             break
     }
 }
@@ -33,16 +50,6 @@ function getComputerChoice() {
     }
 }
 
-function getPlayerChoice() {
-    const validChoices = ["rock", "paper", "scissors"]
-    
-    while (true) {
-        let playerChoice = prompt("Please choose rock, paper, or scissors").toLowerCase()
-        if (validChoices.includes(playerChoice)) return playerChoice
-        else console.log("Invalid choice. Please choose again.")
-    }
-}
-
 function getWeakness(choice) {
     switch(choice) {
         case "rock": return "paper"
@@ -51,12 +58,8 @@ function getWeakness(choice) {
     }
 }
 
-function playRound(playerChoice, computerChoice) {
-    if (playerChoice === computerChoice) return "Tie!"
-    else {
-        if (playerChoice === getWeakness(computerChoice)) return `You win, ${playerChoice} beats ${computerChoice}!`
-        else return `You lose, ${computerChoice} beats ${playerChoice}!`
-    }
+function playRound(playerChoice) {
+    setButtonPaneState("empty")
 }
 
 setButtonPaneState("play")

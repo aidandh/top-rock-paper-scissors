@@ -1,41 +1,41 @@
 function setButtonPaneState(state) {
-    let createButton = (text, parent, clickFunction) => {
+    const buttonPane = document.getElementById("button-pane")
+    buttonPane.innerHTML = ""
+    
+    let createButton = (text, clickFunction) => {
         let button = document.createElement("button")
         button.innerText = text
-        parent.appendChild(button)
+        buttonPane.appendChild(button)
 
         if (clickFunction != undefined) {
             button.addEventListener("click", clickFunction)
         }
     }
     
-    const buttonPane = document.getElementById("button-pane")
-    buttonPane.innerHTML = ""
-    
     switch(state) {
         case "empty":
             break
         
         case "play":
-            createButton("Play", buttonPane, () => {
+            createButton("Play", () => {
                 setButtonPaneState("choice")
             })
             break
 
         case "play_again":
-            createButton("Play Again", buttonPane, () => {
+            createButton("Play Again", () => {
                 setButtonPaneState("choice")
             })
             break
         
         case "choice":
-            createButton("Rock", buttonPane, () => {
+            createButton("Rock", () => {
                 playRound("rock")
             })
-            createButton("Paper", buttonPane, () => {
+            createButton("Paper", () => {
                 playRound("paper")
             })
-            createButton("Scissors", buttonPane, () => {
+            createButton("Scissors", () => {
                 playRound("scissors")
             })
             break

@@ -15,6 +15,16 @@ function setButtonPaneState(state) {
     }
 }
 
+function createButton(text, parent, clickFunction) {
+    let button = document.createElement("button")
+    button.innerText = text
+    parent.appendChild(button)
+
+    if (clickFunction != undefined) {
+        button.addEventListener("click", clickFunction)
+    }
+}
+
 function getComputerChoice() {
     switch(Math.floor(Math.random() * 3)) {
         case 0: return "rock"
@@ -39,12 +49,6 @@ function getWeakness(choice) {
         case "paper": return "scissors"
         case "scissors": return "rock"
     }
-}
-
-function createButton(text, parent) {
-    let button = document.createElement("button")
-    button.innerText = text
-    parent.appendChild(button)
 }
 
 function playRound(playerChoice, computerChoice) {

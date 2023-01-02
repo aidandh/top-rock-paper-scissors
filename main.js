@@ -1,4 +1,14 @@
 function setButtonPaneState(state) {
+    let createButton = (text, parent, clickFunction) => {
+        let button = document.createElement("button")
+        button.innerText = text
+        parent.appendChild(button)
+
+        if (clickFunction != undefined) {
+            button.addEventListener("click", clickFunction)
+        }
+    }
+    
     const buttonPane = document.getElementById("button-pane")
     buttonPane.innerHTML = ""
     
@@ -29,16 +39,6 @@ function setButtonPaneState(state) {
                 playRound("scissors")
             })
             break
-    }
-}
-
-function createButton(text, parent, clickFunction) {
-    let button = document.createElement("button")
-    button.innerText = text
-    parent.appendChild(button)
-
-    if (clickFunction != undefined) {
-        button.addEventListener("click", clickFunction)
     }
 }
 

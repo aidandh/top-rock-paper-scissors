@@ -1,3 +1,20 @@
+function setButtonPaneState(state) {
+    const buttonPane = document.getElementById("button-pane")
+    buttonPane.innerHTML = ""
+    
+    switch(state) {
+        case "play":
+            createButton("Play", buttonPane)
+            break
+        
+        case "choice":
+            createButton("Rock", buttonPane)
+            createButton("Paper", buttonPane)
+            createButton("Scissors", buttonPane)
+            break
+    }
+}
+
 function getComputerChoice() {
     switch(Math.floor(Math.random() * 3)) {
         case 0: return "rock"
@@ -38,16 +55,4 @@ function playRound(playerChoice, computerChoice) {
     }
 }
 
-function playGame() {
-    const buttonDiv = document.getElementById("game-buttons")
-
-    // creates rock, paper, scissors buttons
-    buttonDiv.innerHTML = ""
-    createButton("Rock", buttonDiv)
-    createButton("Paper", buttonDiv)
-    createButton("Scissors", buttonDiv)
-}
-
-// for (let i = 0; i < 5; i++) {
-//     createButton(`button ${i + 1}`, document.body)
-// }
+setButtonPaneState("play")

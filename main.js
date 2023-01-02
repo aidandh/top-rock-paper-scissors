@@ -25,6 +25,7 @@ function setButtonPaneState(state) {
         case "play_again":
             createButton("Play Again", () => {
                 setButtonPaneState("choice")
+                document.getElementById("game-output").innerHTML = ""
             })
             break
         
@@ -59,7 +60,32 @@ function getWeakness(choice) {
 }
 
 function playRound(playerChoice) {
+    const output = document.getElementById("game-output")
+    const outputDelay = 500
+    let createParagraph = (text) => {
+        let p = document.createElement("p")
+        p.innerHTML = text
+        output.appendChild(p)
+    }
+    
     setButtonPaneState("empty")
+
+    createParagraph("Rock")
+    setTimeout(() => {createParagraph("Paper")}, outputDelay)
+    setTimeout(() => {createParagraph("Scissors")}, outputDelay * 2)
+    setTimeout(() => {createParagraph("Shoot!")}, outputDelay * 3)
+    setTimeout(() => {
+        let computerChoice = getComputerChoice()
+        createParagraph(`You chose ${playerChoice}, computer chose ${computerChoice}.`)
+
+        if (playerChoice === computerChoice) {
+            createParagraph("Tie!")
+        } else {
+            createParagraph((playerChoice === getWeakness(computerChoice)) ? "You win!" : "Computer wins!")
+        }
+
+        setButtonPaneState("play_again")
+    }, outputDelay * 4)
 }
 
 setButtonPaneState("play")
